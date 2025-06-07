@@ -16,7 +16,7 @@ jobs:
 
     - name: Disable CONFIG_WERROR
       run: |
-        make scriptsconfig
+        chmod +x scripts/config
         scripts/config --disable CONFIG_WERROR
         make olddefconfig
 
