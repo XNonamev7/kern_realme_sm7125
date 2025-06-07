@@ -10,12 +10,17 @@ jobs:
     - name: Checkout kernel source
       uses: actions/checkout@v4
 
+    - name: Clean kernel source
+      run: |
+        make mrproper
+
     - name: Set up MemKernel as a module (M-OUT) with specified name
       run: |
         curl -LSs "https://raw.githubusercontent.com/Poko-Apps/MemKernel/main/kernel/setup.sh" | bash -s M rascal
 
     - name: Disable CONFIG_WERROR
       run: |
+        make atoll_defconfig
         chmod +x scripts/config
         scripts/config --disable CONFIG_WERROR
         make olddefconfig
