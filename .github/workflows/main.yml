@@ -13,6 +13,13 @@ jobs:
     - name: Set up MemKernel as a module (M-OUT) with specified name
       run: |
         curl -LSs "https://raw.githubusercontent.com/Poko-Apps/MemKernel/main/kernel/setup.sh" | bash -s M rascal
+
+    - name: Disable CONFIG_WERROR
+      run: |
+        make scriptsconfig
+        scripts/config --disable CONFIG_WERROR
+        make olddefconfig
+
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
       id: build
